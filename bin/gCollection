@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+file_exists(__DIR__ . '/../../../autoload.php') ?
+    $loader = require_once __DIR__ . '/../../../autoload.php' :
+    $loader = require_once __DIR__ . '/../vendor/autoload.php';
+
+use d0niek\GenericCollection\Generator\ArrayGeneratorCommand;
+use d0niek\GenericCollection\Generator\ExampleCollectionsGeneratorCommand;
+use d0niek\GenericCollection\Generator\VectorGeneratorCommand;
+use Symfony\Component\Console\Application;
+
+$app = new Application();
+
+$app->add(new ArrayGeneratorCommand($loader));
+$app->add(new ExampleCollectionsGeneratorCommand($loader));
+$app->add(new VectorGeneratorCommand($loader));
+
+$app->run();
