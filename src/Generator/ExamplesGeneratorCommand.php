@@ -3,14 +3,13 @@
 namespace d0niek\GenericCollection\Generator;
 
 use d0niek\GenericCollection\Example\User;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>=
  */
-class ExampleCollectionsGeneratorCommand extends GeneratorCommand
+class ExampleGeneratorCommand extends GeneratorCommand
 {
     /**
      * @var string[]
