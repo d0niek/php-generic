@@ -1,9 +1,9 @@
 <?php
 
-namespace d0niek\Tests;
+namespace d0niek\Tests\Collections;
 
 use d0niek\GenericCollection\Example\Collections\ArrayInt;
-use d0niek\GenericCollection\Collections\ArrayGenericCollection;
+use d0niek\GenericCollection\Collections\ArrayGeneric;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -13,7 +13,7 @@ final class ArrayGenericTest extends TestCase
 {
     public function testIsInstanceOfArrayGenericCollection(): void
     {
-        $this->assertInstanceOf(ArrayGenericCollection::class, new ArrayInt());
+        $this->assertInstanceOf(ArrayGeneric::class, new ArrayInt());
     }
 
     public function testCanBeCreatedWithOneValue(): void

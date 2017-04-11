@@ -5,19 +5,13 @@
 namespace <?= $namespace ?>;
 
 use Ds\Vector;
-use d0niek\GenericCollection\Collections\VectorGenericCollection;
-<?php if (isset($use) && $use !== '') { ?>
-use <?= $use ?>\<?= $class ?>;
-<?php } ?>
+use d0niek\GenericCollection\Collections\VectorGeneric;
+<?= isset($use) ? 'use ' . $use . ";\n" : '' ?>
 
-class Vector<?= $class ?> extends VectorGenericCollection
+final class <?= $class ?> extends VectorGeneric
 {
     /**
-     * @param <?php
-        if (isset($use) && $use !== '') {
-            echo '\\', $use, '\\';
-        }
-        echo $type; ?>[] $data
+     * @param <?= isset($use) ? '\\' . $use : $type ?>... $data
      */
     public function __construct(<?= $type ?> ...$data)
     {
@@ -29,10 +23,10 @@ class Vector<?= $class ?> extends VectorGenericCollection
         return $this->data->contains(...$values);
     }
 
-    public function copy(): Vector<?= $class, "\n" ?>
+    public function copy(): <?= $class, "\n" ?>
     {
         $data = $this->data->copy();
-        return new Vector<?= $class ?>(...$data->toArray());
+        return new <?= $class ?>(...$data->toArray());
     }
 
     public function current(): <?= $type, "\n" ?>
@@ -40,12 +34,12 @@ class Vector<?= $class ?> extends VectorGenericCollection
         return $this->get($this->position);
     }
 
-    public function filter(?callable $callback = null): ?Vector<?= $class, "\n" ?>
+    public function filter(?callable $callback = null): ?<?= $class, "\n" ?>
     {
         $data = $this->data->filter($callback);
         return is_null($data) ?
             null :
-            new Vector<?= $class ?>(...$data->toArray());
+            new <?= $class ?>(...$data->toArray());
     }
 
     public function find(<?= $type ?> $value): int
@@ -76,16 +70,16 @@ class Vector<?= $class ?> extends VectorGenericCollection
         return $this->data->last();
     }
 
-    public function merge(<?= $type ?> ...$values): Vector<?= $class, "\n" ?>
+    public function merge(<?= $type ?> ...$values): <?= $class, "\n" ?>
     {
         $data = $this->data->merge($values);
-        return new Vector<?= $class ?>(...$data->toArray());
+        return new <?= $class ?>(...$data->toArray());
     }
 
-    public function map(callable $callback): Vector<?= $class, "\n" ?>
+    public function map(callable $callback): <?= $class, "\n" ?>
     {
         $data = $this->data->map($callback);
-        return new Vector<?= $class ?>(...$data->toArray());
+        return new <?= $class ?>(...$data->toArray());
     }
 
     public function offsetGet($offset): <?= $type, "\n" ?>
@@ -108,10 +102,10 @@ class Vector<?= $class ?> extends VectorGenericCollection
         return $this->data->remove($index);
     }
 
-    public function reversed(): Vector<?= $class, "\n" ?>
+    public function reversed(): <?= $class, "\n" ?>
     {
         $data = $this->data->reversed();
-        return new Vector<?= $class ?>(...$data->toArray());
+        return new <?= $class ?>(...$data->toArray());
     }
 
     public function set(int $index, <?= $type ?> $value): void
@@ -124,19 +118,19 @@ class Vector<?= $class ?> extends VectorGenericCollection
         return $this->data->shift();
     }
 
-    public function slice(int $index, ?int $length = null): Vector<?= $class, "\n" ?>
+    public function slice(int $index, ?int $length = null): <?= $class, "\n" ?>
     {
         $data = $this->data->slice($index, $length);
-        return new Vector<?= $class ?>(...$data->toArray());
+        return new <?= $class ?>(...$data->toArray());
     }
 
-    public function sorted(?callable $comparator = null): Vector<?= $class, "\n" ?>
+    public function sorted(?callable $comparator = null): <?= $class, "\n" ?>
     {
         $data = is_null($comparator) ?
             $this->data->sorted() :
             $this->data->sorted($comparator);
 
-        return new Vector<?= $class ?>(...$data->toArray());
+        return new <?= $class ?>(...$data->toArray());
     }
 
     public function unshift(<?= $type ?> ...$values): void

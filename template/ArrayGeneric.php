@@ -4,19 +4,13 @@
 
 namespace <?= $namespace ?>;
 
-use d0niek\GenericCollection\Collections\ArrayGenericCollection;
-<?php if (isset($use) && $use !== '') { ?>
-use <?= $use ?>\<?= $class ?>;
-<?php } ?>
+use d0niek\GenericCollection\Collections\ArrayGeneric;
+<?= isset($use) ? 'use ' . $use . ";\n" : '' ?>
 
-class Array<?= $class ?> extends ArrayGenericCollection
+final class <?= $class ?> extends ArrayGeneric
 {
     /**
-     * @param <?php
-        if (isset($use) && $use !== '') {
-            echo '\\', $use, '\\';
-        }
-        echo $type; ?>[] $data
+     * @param <?= isset($use) ? '\\' . $use : $type ?>... $data
      */
     public function __construct(<?= $type ?> ...$data)
     {

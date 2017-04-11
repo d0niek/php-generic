@@ -7,7 +7,7 @@ use Ds\Vector;
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
  */
-abstract class VectorGenericCollection implements \ArrayAccess, \Countable, \Iterator, \JsonSerializable, \Serializable
+abstract class VectorGeneric implements \ArrayAccess, \Countable, \Iterator, \JsonSerializable, \Serializable
 {
     /**
      * @var \Ds\Vector
