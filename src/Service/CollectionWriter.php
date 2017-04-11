@@ -3,6 +3,7 @@
 namespace d0niek\GenericCollection\Service;
 
 use Composer\Autoload\ClassLoader;
+use d0niek\GenericCollection\Model\GenericCollection;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
@@ -25,12 +26,12 @@ class CollectionWriter implements CollectionWriterInterface
     /**
      * @inheritDoc
      */
-    public function save(string $collection, string $namespace, string $class): bool
+    public function write(GenericCollection $genericCollection, string $renderedCollecion): bool
     {
-        $path = $this->getPathToNamespace($namespace . '\\');
-        $fileName = $path . $class . '.php';
+        $path = $this->getPathToNamespace($genericCollection->getNamespace() . '\\');
+        $fileName = $path . $genericCollection->getClass() . '.php';
 
-        $result = file_put_contents($fileName, $collection);
+        $result = file_put_contents($fileName, $renderedCollecion);
 
         return $result !== false;
     }

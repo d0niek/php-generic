@@ -2,6 +2,8 @@
 
 namespace d0niek\GenericCollection\Service;
 
+use d0niek\GenericCollection\Model\GenericCollection;
+
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
  */
@@ -23,22 +25,18 @@ class CollectionRender implements CollectionRenderInterface
     /**
      * @inheritDoc
      */
-    public function render(array $parameters, string $collectionType): string
+    public function render(GenericCollection $genericCollection, string $collectionType): string
     {
         $template = $this->rootPath . '/template/' . $collectionType . 'Generic.php';
         if (!file_exists($template)) {
-            throw new \InvalidArgumentException(
-                'Wrong collection type. Could not find template for ' . $collectionType
-            );
+            throw new \InvalidArgumentException('Could not find template for ' . $collectionType);
         }
-
-        extract($parameters);
 
         ob_start();
         include($template);
-        $genericCollection = "<?php\n" . ob_get_clean();
+        $result = "<?php\n" . ob_get_clean();
 
-        return $genericCollection;
+        return $result;
     }
 
     /**

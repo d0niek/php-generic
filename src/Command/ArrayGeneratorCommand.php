@@ -3,8 +3,10 @@
 namespace d0niek\GenericCollection\Command;
 
 use d0niek\GenericCollection\Collections\GenericType;
+use d0niek\GenericCollection\Model\GenericCollection;
 use d0niek\GenericCollection\Service\CollectionGeneratorInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -45,6 +47,13 @@ class ArrayGeneratorCommand extends Command
                 'namespace',
                 InputArgument::REQUIRED,
                 "Namespace of new generic array."
+            )
+            ->addOption(
+                'saveCollection',
+                's',
+                InputOption::VALUE_OPTIONAL,
+                'Save generated collection to generated-collections.json file.',
+                true
             );
     }
 
@@ -55,8 +64,16 @@ class ArrayGeneratorCommand extends Command
     {
         $type = $input->getArgument('type');
         $namespace = $input->getArgument('namespace');
+        $genericCollection = new GenericCollection($type, $namespace);
+        $saveCollection = $input->getOption('saveCollection');
 
-        $this->collectionGenerator->generate($type, $namespace, GenericType::ARRAY_TYPE);
+        if ($saveCollection !== true && $saveCollection !== 'true' && $saveCollection !== 'false') {
+            throw new \InvalidArgumentException('Possible values for saveCollection option are true or false');
+        }
+
+        $saveCollection = $saveCollection === 'false' ? false : true;
+
+        $this->collectionGenerator->generate($genericCollection, GenericType::ARRAY_TYPE, $saveCollection);
 
         return 0;
     }

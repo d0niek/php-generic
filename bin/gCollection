@@ -4,13 +4,17 @@
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
  */
 
-$loader = file_exists(__DIR__ . '/../../../autoload.php') ?
-    require_once __DIR__ . '/../../../autoload.php' :
-    require_once __DIR__ . '/../vendor/autoload.php';
+$appPath = file_exists(__DIR__ . '/../../../autoload.php') ?
+    __DIR__ . '/../../../..' :
+    __DIR__ . '/..';
+
+$loader = require_once $appPath . '/vendor/autoload.php';
 
 use d0niek\GenericCollection\Command\ArrayGeneratorCommand;
 use d0niek\GenericCollection\Command\ExamplesGeneratorCommand;
 use d0niek\GenericCollection\Command\VectorGeneratorCommand;
+use d0niek\GenericCollection\Command\RegeneratCollectionsCommand;
+use d0niek\GenericCollection\Repository\JsonGenericCollectionRepository;
 use d0niek\GenericCollection\Service\CollectionWriter;
 use d0niek\GenericCollection\Service\CollectionRender;
 use d0niek\GenericCollection\Service\CollectionGenerator;
@@ -18,11 +22,13 @@ use Symfony\Component\Console\Application;
 
 $collectionRender = new CollectionRender(__DIR__ . '/..');
 $collectionWriter = new CollectionWriter($loader);
-$collectionGenerator = new CollectionGenerator($collectionRender, $collectionWriter);
+$genericCollectionRepository = new JsonGenericCollectionRepository($appPath . '/generated-collections.json');
+$collectionGenerator = new CollectionGenerator($collectionRender, $collectionWriter, $genericCollectionRepository);
 
 $app = new Application();
 $app->add(new ArrayGeneratorCommand($collectionGenerator));
 $app->add(new ExamplesGeneratorCommand($collectionGenerator));
 $app->add(new VectorGeneratorCommand($collectionGenerator));
+$app->add(new RegeneratCollectionsCommand($collectionGenerator));
 
 $app->run();

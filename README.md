@@ -5,12 +5,12 @@ which shows how to create strictly typed arrays and collections in PHP, GenericC
 
 ---
 
-It is not exaly what you know from Java or C++ where generic looks like
+It is not exacly what you know from Java or C++ where generic looks like
 `Vector<int>()`, `Array<bool>()` or `Vector<\Namespace\Entity\User>()`.
 
 Here generics looks like `VectorInt`, `ArrayBool` and `VectorUser`
 so I hope when they come to nativ Php all what you need to do will be:
-1. Replace all `VectorType`, `ArrayType` to `Vector<Type>`, `Array<Type>`,
+1. Replace all `VectorType`, `ArrayType` to `Vector<Type>`, `array<Type>`,
 2. Delete directory where you store all generated collections,
 3. Enjoy a nice day.
 
@@ -20,23 +20,24 @@ so I hope when they come to nativ Php all what you need to do will be:
 $ composer require d0niek/generic-collection
 ```
 
-## Generate collection
+## Generate generic array
 
-There is bin command that you should find it in **vendor/bin**
+There is bin command that you should find in **vendor/bin**
 or somewhere else according to your **composer.json** settings.
 
 To generate generic array run:
 
 ```bash
-$ bin/gCollection generate:array <type> <namespace>
+$ bin/gCollection generate:array [-s|--saveCollection [SAVECOLLECTION]] [--] <type> <namespace>
 ```
 where:
+* **-s**|**--saveCollection** - do you want to save generated collection for future regenerate (default **true**),
 * **type** - is a type of generic collection. It can be simple type (bool, int, float, string, array)
 or complex type (\\YourApp\\Module\\Repository\\User),
 * **namespace** - is a namespace where new generic collection will be save.
 Remember that namespace's directory have to exists.
 
-For example you have project in **/path/to/project** and your **composer.json** contains this kind od entry:
+For example you have project in **/path/to/project** and your **composer.json** contains this kind of entry:
 ```json
 "autoload": {
     "psr-4": {
@@ -50,17 +51,29 @@ $ bin/gCollection generate:array int VendorName\\AppName\\Collections
 ```
 new generic array `ArrayInt` will be save to **/path/to/project/src/Collections/** directory.
 If this directory does not exists, exceptions will be throw.
-> Tip! Store all collections in one place. When php will start support generic collections,
-replace `ArrayInt` to `array<int>` and remove collections directory.
+> Tip! Store all collections in one diretory and add it to **.gitignore**.
+When php will start support generic collections, replace `ArrayInt` to `array<int>` and remove collections directory.
+
+## Generate generic Vector
 
 You can alse generate generic [\\Ds\\Vector](http://php.net/manual/en/class.ds-vector.php)
 (it is new data structure since Php7,
     [here](https://medium.com/@rtheunissen/efficient-data-structures-for-php-7-9dda7af674cd)
     you can and you should read about it!). To do this just run:
 ```bash
-$ bin/gCollection generate:vector <type> <namespace>
+$ bin/gCollection generate:vector [-s|--saveCollection [SAVECOLLECTION]] [--] <type> <namespace>
 ```
-`type` and `namespace` means exacly the same whats means when you run `generate:array`.
+parameters means exacly the same whats means when you run `generate:array`.
+
+## Regenerate collections
+
+By defaule generated collection is save in **generated-colletions.json** file in your root app path.
+Keep this file in repository and ignore all generated collections. When you clone repository,
+after `composer install` run:
+```bash
+$ bin/gCollection collections:regenerate
+```
+and all your collections will be regenerate.
 
 ## Select data from DB
 
@@ -96,9 +109,9 @@ class UserRepository implements UserRepositoryInterface
 
 ## Test
 
-Before you run tests remember to generate example collections. Run:
+Before you run tests remember to regenerate collections. Run:
 ```bash
-$ bin/gCollection generate:examples
+$ bin/gCollection collections:regenerate
 ```
 and now you can run
 ```bash

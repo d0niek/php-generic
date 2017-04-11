@@ -1,48 +1,50 @@
 /**
- * Generic Collection \Ds\Vector<<?= $type ?>>
+ * Generic Collection \Ds\Vector<<?= $genericCollection->getType() ?>>
  */
 
-namespace <?= $namespace ?>;
+namespace <?= $genericCollection->getNamespace() ?>;
 
 use Ds\Vector;
 use d0niek\GenericCollection\Collections\VectorGeneric;
-<?= isset($use) ? 'use ' . $use . ";\n" : '' ?>
+<?= $genericCollection->getUse() !== '' ? 'use ' . $genericCollection->getUse() . ";\n" : '' ?>
 
-final class <?= $class ?> extends VectorGeneric
+final class <?= $genericCollection->getClass() ?> extends VectorGeneric
 {
     /**
-     * @param <?= isset($use) ? '\\' . $use : $type ?>... $data
+     * @param <?= $genericCollection->getUse() !== '' ?
+                      '\\' . $genericCollection->getUse() :
+                      $genericCollection->getType() ?> ...$data
      */
-    public function __construct(<?= $type ?> ...$data)
+    public function __construct(<?= $genericCollection->getType() ?> ...$data)
     {
         $this->data = new Vector($data);
     }
 
-    public function contains(<?= $type ?> ...$values): bool
+    public function contains(<?= $genericCollection->getType() ?> ...$values): bool
     {
         return $this->data->contains(...$values);
     }
 
-    public function copy(): <?= $class, "\n" ?>
+    public function copy(): <?= $genericCollection->getClass(), "\n" ?>
     {
         $data = $this->data->copy();
-        return new <?= $class ?>(...$data->toArray());
+        return new <?= $genericCollection->getClass() ?>(...$data->toArray());
     }
 
-    public function current(): <?= $type, "\n" ?>
+    public function current(): <?= $genericCollection->getType(), "\n" ?>
     {
         return $this->get($this->position);
     }
 
-    public function filter(?callable $callback = null): ?<?= $class, "\n" ?>
+    public function filter(?callable $callback = null): ?<?= $genericCollection->getClass(), "\n" ?>
     {
         $data = $this->data->filter($callback);
         return is_null($data) ?
             null :
-            new <?= $class ?>(...$data->toArray());
+            new <?= $genericCollection->getClass() ?>(...$data->toArray());
     }
 
-    public function find(<?= $type ?> $value): int
+    public function find(<?= $genericCollection->getType() ?> $value): int
     {
         $index = $this->data->find($value);
         return $index !== false ?
@@ -50,90 +52,90 @@ final class <?= $class ?> extends VectorGeneric
             -1;
     }
 
-    public function first(): <?= $type, "\n" ?>
+    public function first(): <?= $genericCollection->getType(), "\n" ?>
     {
         return $this->data->first();
     }
 
-    public function get(int $index): <?= $type, "\n" ?>
+    public function get(int $index): <?= $genericCollection->getType(), "\n" ?>
     {
         return $this->data->get($index);
     }
 
-    public function insert(int $index, <?= $type ?> ...$values): void
+    public function insert(int $index, <?= $genericCollection->getType() ?> ...$values): void
     {
         $this->data->insert($index, ...$values);
     }
 
-    public function last(): <?= $type, "\n" ?>
+    public function last(): <?= $genericCollection->getType(), "\n" ?>
     {
         return $this->data->last();
     }
 
-    public function merge(<?= $type ?> ...$values): <?= $class, "\n" ?>
+    public function merge(<?= $genericCollection->getType() ?> ...$values): <?= $genericCollection->getClass(), "\n" ?>
     {
         $data = $this->data->merge($values);
-        return new <?= $class ?>(...$data->toArray());
+        return new <?= $genericCollection->getClass() ?>(...$data->toArray());
     }
 
-    public function map(callable $callback): <?= $class, "\n" ?>
+    public function map(callable $callback): <?= $genericCollection->getClass(), "\n" ?>
     {
         $data = $this->data->map($callback);
-        return new <?= $class ?>(...$data->toArray());
+        return new <?= $genericCollection->getClass() ?>(...$data->toArray());
     }
 
-    public function offsetGet($offset): <?= $type, "\n" ?>
+    public function offsetGet($offset): <?= $genericCollection->getType(), "\n" ?>
     {
         return $this->data[$offset];
     }
 
-    public function pop(): <?= $type, "\n" ?>
+    public function pop(): <?= $genericCollection->getType(), "\n" ?>
     {
         return $this->data->pop();
     }
 
-    public function push(<?= $type ?> ...$values): void
+    public function push(<?= $genericCollection->getType() ?> ...$values): void
     {
         $this->data->push(...$values);
     }
 
-    public function remove(int $index): <?= $type, "\n" ?>
+    public function remove(int $index): <?= $genericCollection->getType(), "\n" ?>
     {
         return $this->data->remove($index);
     }
 
-    public function reversed(): <?= $class, "\n" ?>
+    public function reversed(): <?= $genericCollection->getClass(), "\n" ?>
     {
         $data = $this->data->reversed();
-        return new <?= $class ?>(...$data->toArray());
+        return new <?= $genericCollection->getClass() ?>(...$data->toArray());
     }
 
-    public function set(int $index, <?= $type ?> $value): void
+    public function set(int $index, <?= $genericCollection->getType() ?> $value): void
     {
         $this->data->set($index, $value);
     }
 
-    public function shift(): <?= $type, "\n" ?>
+    public function shift(): <?= $genericCollection->getType(), "\n" ?>
     {
         return $this->data->shift();
     }
 
-    public function slice(int $index, ?int $length = null): <?= $class, "\n" ?>
+    public function slice(int $index, ?int $length = null): <?= $genericCollection->getClass(), "\n" ?>
     {
         $data = $this->data->slice($index, $length);
-        return new <?= $class ?>(...$data->toArray());
+        return new <?= $genericCollection->getClass() ?>(...$data->toArray());
     }
 
-    public function sorted(?callable $comparator = null): <?= $class, "\n" ?>
+    public function sorted(?callable $comparator = null): <?= $genericCollection->getClass(), "\n" ?>
     {
         $data = is_null($comparator) ?
             $this->data->sorted() :
             $this->data->sorted($comparator);
 
-        return new <?= $class ?>(...$data->toArray());
+        return new <?= $genericCollection->getClass() ?>(...$data->toArray());
     }
 
-    public function unshift(<?= $type ?> ...$values): void
+    public function unshift(<?= $genericCollection->getType() ?> ...$values): void
     {
         $this->data->unshift(...$values);
     }

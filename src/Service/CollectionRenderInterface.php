@@ -2,6 +2,8 @@
 
 namespace d0niek\GenericCollection\Service;
 
+use d0niek\GenericCollection\Model\GenericCollection;
+
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
  */
@@ -10,11 +12,11 @@ interface CollectionRenderInterface
     /**
      * Render generic collection
      *
-     * @param array $parameters
+     * @param \d0niek\GenericCollection\Model\GenericCollection $genericCollection
      * @param string $collectionType
      *
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function render(array $parameters, string $collectionType): string;
+    public function render(GenericCollection $genericCollection, string $collectionType): string;
 }

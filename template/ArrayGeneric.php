@@ -1,36 +1,38 @@
 /**
- * Generic Collection array<<?= $type ?>>
+ * Generic Collection array<<?= $genericCollection->getType() ?>>
  */
 
-namespace <?= $namespace ?>;
+namespace <?= $genericCollection->getNamespace() ?>;
 
 use d0niek\GenericCollection\Collections\ArrayGeneric;
-<?= isset($use) ? 'use ' . $use . ";\n" : '' ?>
+<?= $genericCollection->getUse() !== '' ? 'use ' . $genericCollection->getUse() . ";\n" : '' ?>
 
-final class <?= $class ?> extends ArrayGeneric
+final class <?= $genericCollection->getClass() ?> extends ArrayGeneric
 {
     /**
-     * @param <?= isset($use) ? '\\' . $use : $type ?>... $data
+     * @param <?= $genericCollection->getUse() !== '' ?
+                      '\\' . $genericCollection->getUse() :
+                      $genericCollection->getType() ?> ...$data
      */
-    public function __construct(<?= $type ?> ...$data)
+    public function __construct(<?= $genericCollection->getType() ?> ...$data)
     {
         $this->data = $data;
     }
 
-    public function current(): <?= $type, "\n" ?>
+    public function current(): <?= $genericCollection->getType(), "\n" ?>
     {
         return current($this->data);
     }
 
-    public function offsetGet($offset): <?= $type, "\n" ?>
+    public function offsetGet($offset): <?= $genericCollection->getType(), "\n" ?>
     {
         return $this->data[$offset];
     }
 
     public function offsetSet($offset, $value): void
     {
-        if (!<?= $this->getTypeCheckStatement($type) ?>) {
-            throw new \InvalidArgumentException('Value ' . gettype($value) . ' is not instance of <?= $type ?>');
+        if (!<?= $this->getTypeCheckStatement($genericCollection->getType()) ?>) {
+            throw new \InvalidArgumentException('Value ' . gettype($value) . ' is not instance of <?= $genericCollection->getType() ?>');
         }
 
         is_null($offset) ?

@@ -4,6 +4,7 @@ namespace d0niek\GenericCollection\Command;
 
 use d0niek\GenericCollection\Collections\GenericType;
 use d0niek\GenericCollection\Example\User;
+use d0niek\GenericCollection\Model\GenericCollection;
 use d0niek\GenericCollection\Service\CollectionGeneratorInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -27,7 +28,7 @@ class ExamplesGeneratorCommand extends Command
     /**
      * @var string[]
      */
-    private $classType = [
+    private $complexType = [
         \Exception::class,
         User::class,
         '\\Not\\Existing\\ClassName'
@@ -62,13 +63,19 @@ class ExamplesGeneratorCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         foreach ($this->primitiveType as $type) {
-            $this->collectionGenerator->generate($type, $this->namespace, GenericType::ARRAY_TYPE);
-            $this->collectionGenerator->generate($type, $this->namespace, GenericType::VECTOR_TYPE);
+            $genericCollection = new GenericCollection($type, $this->namespace);
+            $this->collectionGenerator->generate($genericCollection, GenericType::ARRAY_TYPE, false);
+
+            $genericCollection = new GenericCollection($type, $this->namespace);
+            $this->collectionGenerator->generate($genericCollection, GenericType::VECTOR_TYPE, false);
         }
 
-        foreach ($this->classType as $class) {
-            $this->collectionGenerator->generate($class, $this->namespace, GenericType::ARRAY_TYPE);
-            $this->collectionGenerator->generate($class, $this->namespace, GenericType::VECTOR_TYPE);
+        foreach ($this->complexType as $type) {
+            $genericCollection = new GenericCollection($type, $this->namespace);
+            $this->collectionGenerator->generate($genericCollection, GenericType::ARRAY_TYPE, false);
+
+            $genericCollection = new GenericCollection($type, $this->namespace);
+            $this->collectionGenerator->generate($genericCollection, GenericType::VECTOR_TYPE, false);
         }
 
         return 0;
