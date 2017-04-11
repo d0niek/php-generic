@@ -4,7 +4,10 @@ namespace d0niek\GenericCollection\Collections;
 
 use Ds\Vector;
 
-abstract class VectorGenericCollection implements \IteratorAggregate, \Countable, \JsonSerializable, \ArrayAccess
+/**
+ * @author Damian Glinkowski <damianglinkowski@gmail.com>
+ */
+abstract class VectorGenericCollection implements \ArrayAccess, \Countable, \Iterator, \JsonSerializable, \Serializable
 {
     /**
      * @var \Ds\Vector
@@ -12,12 +15,9 @@ abstract class VectorGenericCollection implements \IteratorAggregate, \Countable
     protected $data;
 
     /**
-     * @return \Ds\Vector
+     * @var int
      */
-    public function toVector(): Vector
-    {
-        return $this->data;
-    }
+    protected $position = 0;
 
     public function allocate(int $capacity): void
     {
@@ -54,6 +54,38 @@ abstract class VectorGenericCollection implements \IteratorAggregate, \Countable
         return $this->data->join($glue);
     }
 
+    public function jsonSerialize(): array
+    {
+        return $this->data->toArray();
+    }
+
+    public function key(): int
+    {
+        return $this->position;
+    }
+
+    public function next(): void
+    {
+        $this->position++;
+    }
+
+    public function offsetExists($offset): bool
+    {
+        return isset($this->data[$offset]);
+    }
+
+    public function offsetSet($offset, $value): void
+    {
+        is_null($offset) ?
+            $this->data->push($value) :
+            $this->data->set($offset, $value);
+    }
+
+    public function offsetUnset($offset): void
+    {
+        unset($this->data[$offset]);
+    }
+
     public function reduce(callable $callback, $initial = null)
     {
         return $this->data->reduce($callback, $initial);
@@ -64,9 +96,19 @@ abstract class VectorGenericCollection implements \IteratorAggregate, \Countable
         $this->data->reverse();
     }
 
+    public function rewind(): void
+    {
+        $this->position = 0;
+    }
+
     public function rotate(int $rotations): void
     {
         $this->data->rotate($rotations);
+    }
+
+    public function serialize(): string
+    {
+        return serialize($this->data);
     }
 
     public function sort(?callable $comparator = null): void
@@ -86,31 +128,18 @@ abstract class VectorGenericCollection implements \IteratorAggregate, \Countable
         return $this->data->toArray();
     }
 
-    public function jsonSerialize(): array
+    public function toVector(): Vector
     {
-        return $this->data->toArray();
+        return $this->data;
     }
 
-    public function getIterator(): \Generator
+    public function unserialize($serialized): void
     {
-        foreach ($this->data as $value) {
-            yield $value;
-        }
+        $this->data = unserialize($serialized);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function offsetUnset($offset): void
+    public function valid(): bool
     {
-        unset($this->data[$offset]);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function offsetExists($offset): bool
-    {
-        return isset($this->data[$offset]);
+        return !($this->position === $this->count());
     }
 }

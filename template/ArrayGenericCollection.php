@@ -23,17 +23,16 @@ class Array<?= $class ?> extends ArrayGenericCollection
         $this->data = $data;
     }
 
-    /**
-     * @inheritDoc
-     */
+    public function current(): <?= $type, "\n" ?>
+    {
+        return current($this->data);
+    }
+
     public function offsetGet($offset): <?= $type, "\n" ?>
     {
         return $this->data[$offset];
     }
 
-    /**
-     * @inheritDoc
-     */
     public function offsetSet($offset, $value): void
     {
         if (!<?= $this->getTypeCheckStatement($type) ?>) {
@@ -43,13 +42,5 @@ class Array<?= $class ?> extends ArrayGenericCollection
         is_null($offset) ?
             $this->data[] = $value :
             $this->data[$offset] = $value;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function current(): <?= $type, "\n" ?>
-    {
-        return current($this->data);
     }
 }

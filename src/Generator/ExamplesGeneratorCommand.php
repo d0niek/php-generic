@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>=
  */
-class ExampleGeneratorCommand extends GeneratorCommand
+class ExamplesGeneratorCommand extends GeneratorCommand
 {
     /**
      * @var string[]
@@ -34,7 +34,7 @@ class ExampleGeneratorCommand extends GeneratorCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $namespace = 'd0niek\\GenericCollection\\Collections';
+        $namespace = 'd0niek\\GenericCollection\\Example\\Collections';
 
         foreach ($this->primitiveType as $type) {
             $data = [

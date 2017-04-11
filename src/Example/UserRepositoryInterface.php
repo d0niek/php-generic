@@ -2,7 +2,7 @@
 
 namespace d0niek\GenericCollection\Example;
 
-use d0niek\GenericCollection\Collections\VectorUser;
+use d0niek\GenericCollection\Example\Collections\VectorUser;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
@@ -10,7 +10,7 @@ use d0niek\GenericCollection\Collections\VectorUser;
 interface UserRepositoryInterface
 {
     /**
-     * @return \d0niek\GenericCollection\Collections\VectorUser
+     * @return \d0niek\GenericCollection\Example\Collections\VectorUser
      */
     public function findAll(): VectorUser;
 }

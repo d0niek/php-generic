@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+###
+ # @author Damian Glinkowski <damianglinkowski@gmail.com>
+ ##
 
 ./bin/phpmd . xml phpmd-ruleset.xml --reportfile report/phpmd.xml --exclude vendor
 

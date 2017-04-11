@@ -2,10 +2,13 @@
 
 namespace d0niek\Tests;
 
-use d0niek\GenericCollection\Collections\VectorInt;
+use d0niek\GenericCollection\Example\Collections\VectorInt;
 use d0niek\GenericCollection\Collections\VectorGenericCollection;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @author Damian Glinkowski <damianglinkowski@gmail.com>
+ */
 final class VectorGenericTest extends TestCase
 {
     public function testIsInstanceOfArrayGenericCollection(): void
@@ -15,23 +18,23 @@ final class VectorGenericTest extends TestCase
 
     public function testCanBeCreatedWithOneValue(): void
     {
-        $array = new VectorInt(1);
+        $vector = new VectorInt(1);
 
-        $this->assertSame(1, $array->count());
+        $this->assertSame(1, $vector->count());
     }
 
     public function testCanBeCreatedWithMultiValues(): void
     {
-        $array = new VectorInt(1, 2, 45);
+        $vector = new VectorInt(1, 2, 45);
 
-        $this->assertSame(3, $array->count());
+        $this->assertSame(3, $vector->count());
     }
 
     public function testCanBeCreatedWithNumberValues(): void
     {
-        $array = new VectorInt('3', 2.4, -45);
+        $vector = new VectorInt('3', 2.4, -45);
 
-        $this->assertSame(3, $array->count());
+        $this->assertSame(3, $vector->count());
     }
 
     public function testCannotBeCreatedWithNotNumberValue(): void
@@ -44,12 +47,12 @@ final class VectorGenericTest extends TestCase
         new VectorInt(3, 4.5, 'string');
     }
 
-    public function testCanAccesToGenericCollectionAsToNormalArray(): void
+    public function testCanAccesToGenericVectorAsToNormalArray(): void
     {
-        $array = new VectorInt(3, '4');
+        $vector = new VectorInt(3, '4');
 
-        $this->assertSame(4, $array[1]);
-        $this->assertSame(3, $array[0]);
+        $this->assertSame(4, $vector[1]);
+        $this->assertSame(3, $vector[0]);
     }
 
     public function testAllocatesEnoughMemoryForRequiredCapacity(): void
@@ -86,7 +89,7 @@ final class VectorGenericTest extends TestCase
         $this->assertSame(0, $vector->count());
     }
 
-    public function testDeterminesIfVectorContainsGIvenValues(): void
+    public function testDeterminesIfVectorContainsGivenValues(): void
     {
         $vector = new VectorInt(3, 2, 56);
 
@@ -112,6 +115,7 @@ final class VectorGenericTest extends TestCase
     {
         $vector = new VectorInt(3, 4, 12);
 
+        $this->assertSame(3, $vector->count());
         $this->assertSame(count($vector), $vector->count());
     }
 
@@ -125,6 +129,7 @@ final class VectorGenericTest extends TestCase
 
         $this->assertInstanceOf(get_class($vector), $filterVector);
         $this->assertFalse($filterVector->contains(3, 5));
+        $this->assertTrue($filterVector->contains(2, 4, 6));
     }
 
     public function testAttemptsToFindValuesIndex(): void
@@ -178,6 +183,18 @@ final class VectorGenericTest extends TestCase
         $vector = new VectorInt(2, 3);
 
         $vector->insert(5, 34);
+    }
+
+    public function testInsertNotNumberValue(): void
+    {
+        $this->expectException(\TypeError::class);
+        $this->expectExceptionMessageRegExp(
+            '/Argument 2 passed to .+insert\(\) must be of the type integer, string given/'
+        );
+
+        $vector = new VectorInt(4, 5);
+
+        $vector->insert(1, 'string');
     }
 
     public function testVectorIsEmpty(): void
@@ -260,7 +277,23 @@ final class VectorGenericTest extends TestCase
         $vector->push(1, 56);
 
         $this->assertSame(56, $vector->last());
-        $this->assertCount(5, $vector);
+
+        $vector[] = 3;
+
+        $this->assertSame(3, $vector->last());
+        $this->assertCount(6, $vector);
+    }
+
+    public function testAddsNotNumberValueToCollection(): void
+    {
+        $this->expectException(\TypeError::class);
+        $this->expectExceptionMessageRegExp(
+            '/Argument 2 passed to .+push\(\) must be of the type integer, string given/'
+        );
+
+        $vector = new VectorInt(4, 5);
+
+        $vector->push(1, 'string');
     }
 
     public function testReducesVectorToSingleValueUsingCallbackFunction(): void

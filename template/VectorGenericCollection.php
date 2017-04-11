@@ -35,16 +35,25 @@ class Vector<?= $class ?> extends VectorGenericCollection
         return new Vector<?= $class ?>(...$data->toArray());
     }
 
+    public function current(): <?= $type, "\n" ?>
+    {
+        return $this->get($this->position);
+    }
+
     public function filter(?callable $callback = null): ?Vector<?= $class, "\n" ?>
     {
         $data = $this->data->filter($callback);
-        return $data === null ? null : new Vector<?= $class ?>(...$data->toArray());
+        return is_null($data) ?
+            null :
+            new Vector<?= $class ?>(...$data->toArray());
     }
 
     public function find(<?= $type ?> $value): int
     {
         $index = $this->data->find($value);
-        return $index !== false ? $index : -1;
+        return $index !== false ?
+            $index :
+            -1;
     }
 
     public function first(): <?= $type, "\n" ?>
@@ -79,6 +88,11 @@ class Vector<?= $class ?> extends VectorGenericCollection
         return new Vector<?= $class ?>(...$data->toArray());
     }
 
+    public function offsetGet($offset): <?= $type, "\n" ?>
+    {
+        return $this->data[$offset];
+    }
+
     public function pop(): <?= $type, "\n" ?>
     {
         return $this->data->pop();
@@ -105,20 +119,6 @@ class Vector<?= $class ?> extends VectorGenericCollection
         $this->data->set($index, $value);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function offsetSet($offset, $value): void
-    {
-        if (!<?= $this->getTypeCheckStatement($type) ?>) {
-            throw new \InvalidArgumentException('Value ' . gettype($value) . ' is not instance of <?= $type ?>');
-        }
-
-        is_null($offset) ?
-            $this->data->push($value) :
-            $this->data->set($offset, $value);
-    }
-
     public function shift(): <?= $type, "\n" ?>
     {
         return $this->data->shift();
@@ -142,13 +142,5 @@ class Vector<?= $class ?> extends VectorGenericCollection
     public function unshift(<?= $type ?> ...$values): void
     {
         $this->data->unshift(...$values);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function offsetGet($offset): <?= $type, "\n" ?>
-    {
-        return $this->data[$offset];
     }
 }

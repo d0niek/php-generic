@@ -2,10 +2,13 @@
 
 namespace d0niek\Tests;
 
-use d0niek\GenericCollection\Collections\ArrayInt;
+use d0niek\GenericCollection\Example\Collections\ArrayInt;
 use d0niek\GenericCollection\Collections\ArrayGenericCollection;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @author Damian Glinkowski <damianglinkowski@gmail.com>
+ */
 final class ArrayGenericTest extends TestCase
 {
     public function testIsInstanceOfArrayGenericCollection(): void
@@ -44,7 +47,7 @@ final class ArrayGenericTest extends TestCase
         new ArrayInt(3, 4.5, 'string');
     }
 
-    public function testCanAccesToGenericCollectionAsToNormalArray(): void
+    public function testCanAccesToGenericArrayAsToNormalArray(): void
     {
         $array = new ArrayInt(3, '4');
 

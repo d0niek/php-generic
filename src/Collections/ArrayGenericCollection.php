@@ -2,6 +2,9 @@
 
 namespace d0niek\GenericCollection\Collections;
 
+/**
+ * @author Damian Glinkowski <damianglinkowski@gmail.com>
+ */
 abstract class ArrayGenericCollection implements \ArrayAccess, \Iterator, \Countable, \Serializable
 {
     /**
@@ -10,82 +13,59 @@ abstract class ArrayGenericCollection implements \ArrayAccess, \Iterator, \Count
     protected $data;
 
     /**
-     * @return array
+     * @var int
      */
-    public function toArray(): array
-    {
-        return $this->data;
-    }
+    protected $position = 0;
 
-    /**
-     * @inheritDoc
-     */
     public function count(): int
     {
         return count($this->data);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function key()
     {
         return key($this->data);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function next(): void
     {
+        $this->position++;
         next($this->data);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function offsetExists($offset): bool
     {
         return isset($this->data[$offset]);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function offsetUnset($offset): void
     {
         unset($this->data[$offset]);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function rewind(): void
     {
+        $this->position = 0;
         reset($this->data);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function serialize(): string
     {
         return serialize($this->data);
     }
 
-    /**
-     * @inheritDoc
-     */
+    public function toArray(): array
+    {
+        return $this->data;
+    }
+
     public function unserialize($serialized): void
     {
         $this->data = unserialize($serialized);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function valid(): bool
     {
-        return current($this->data);
+        return !($this->position === count($this->data));
     }
 }
