@@ -14,6 +14,12 @@ so I hope when they come to nativ Php all what you need to do will be:
 2. Delete directory where you store all generated collections,
 3. Enjoy a nice day.
 
+## Install
+
+```bash
+$ composer require d0niek/generic-collection
+```
+
 ## Generate collection
 
 There is bin command that you should find it in **vendor/bin**
