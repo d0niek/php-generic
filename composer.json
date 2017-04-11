@@ -1,0 +1,49 @@
+{
+    "name": "d0niek/generic-collection",
+    "description": "Generator for generic collections.",
+    "type": "library",
+    "keywords": [
+        "genericcollection",
+        "generic",
+        "collection"
+    ],
+    "homepage": "https://github.com/d0niek/GenericCollection",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Damian Glinkowski",
+            "email": "damianglinkowski@gmail.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/d0niek/GenericCollection/issues"
+    },
+    "require": {
+        "php": "^7.1",
+        "symfony/console": "^3.2"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^2.8",
+        "phpmd/phpmd": "^2.6",
+        "phpunit/phpunit": "^6.1"
+    },
+    "suggest": {
+        "php-ds/php-ds": "^1.1"
+    },
+    "bin": [
+        "bin/gCollection"
+    ],
+    "autoload": {
+        "psr-4": {
+            "d0niek\\GenericCollection\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "d0niek\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
