@@ -60,20 +60,41 @@ $ bin/gCollection generate:vector <type> <namespace>
 
 Now you can create in easy way specific generic collection when you are selecting data from DB
 ```php
-public function findAll(): VectorUser
+class UserRepository implements UserRepositoryInterface
 {
-    $users = new VectorUser();
-    $mysqli = new \mysqli('localhost:3306', 'user', 'password', 'db');
+    ...
 
-    $mysqliResult = $mysqli->query('SELECT id, name FROM users LIMIT 10');
-    if ($mysqliResult !== false) {
-        while (($user = $mysqliResult->fetch_object(User::class)) !== null) {
-            $users->push($user);
+    /**
+     * @inheritDoc
+     */
+    public function findAll(): VectorUser
+    {
+        $users = new VectorUser();
+        $mysqli = new \mysqli('localhost:3306', 'user', 'password', 'db');
+
+        $mysqliResult = $mysqli->query('SELECT id, name FROM users LIMIT 10');
+        if ($mysqliResult !== false) {
+            while (($user = $mysqliResult->fetch_object(User::class)) !== null) {
+                $users->push($user);
+            }
         }
+
+        $mysqli->close();
+
+        return $users;
     }
 
-    $mysqli->close();
-
-    return $users;
+    ...
 }
+```
+
+## Test
+
+Before you run tests remember to generate example collections. Run:
+```bash
+$ bin/gCollection generate:examples
+```
+and now you can run
+```bash
+$ phpunit
 ```
