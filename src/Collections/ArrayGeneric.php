@@ -5,7 +5,7 @@ namespace d0niek\GenericCollection\Collections;
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
  */
-abstract class ArrayGenericCollection implements \ArrayAccess, \Iterator, \Countable, \Serializable
+abstract class ArrayGeneric implements \ArrayAccess, \Iterator, \Countable, \Serializable
 {
     /**
      * @var array

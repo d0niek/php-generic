@@ -1,0 +1,14 @@
+[
+    {
+        "type": "int",
+        "namespace": "d0niek\\GenericCollection\\Example\\Collections",
+        "class": "ArrayInt",
+        "use": ""
+    },
+    {
+        "type": "int",
+        "namespace": "d0niek\\GenericCollection\\Example\\Collections",
+        "class": "VectorInt",
+        "use": ""
+    }
+]

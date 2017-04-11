@@ -1,9 +1,9 @@
 <?php
 
-namespace d0niek\Tests;
+namespace d0niek\Tests\Collections;
 
 use d0niek\GenericCollection\Example\Collections\VectorInt;
-use d0niek\GenericCollection\Collections\VectorGenericCollection;
+use d0niek\GenericCollection\Collections\VectorGeneric;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -13,7 +13,7 @@ final class VectorGenericTest extends TestCase
 {
     public function testIsInstanceOfArrayGenericCollection(): void
     {
-        $this->assertInstanceOf(VectorGenericCollection::class, new VectorInt());
+        $this->assertInstanceOf(VectorGeneric::class, new VectorInt());
     }
 
     public function testCanBeCreatedWithOneValue(): void
