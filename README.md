@@ -5,6 +5,9 @@ which shows how to create strictly typed arrays and collections in Php7, php-gen
 
 ---
 
+There is some [discusion](https://wiki.php.net/rfc/generic-arrays) about generic in Php
+but who knows when it comes to us.
+
 It is not exacly what you know from Java or C++ where generic looks like
 `Vector<int>()`, `Array<bool>()` or `Vector<\Namespace\Entity\User>()`.
 
@@ -14,13 +17,19 @@ so I hope when they come to nativ Php all what you need to do will be:
 2. Delete directory where you store all generated array/vector,
 3. Enjoy a nice day.
 
+## What generics are (not)
+
+They are not collections like Doctrine or Laravel Collections. They are like normal php array
+which can store values one type. `array<int>` can store only numeric values which will converted to `int`
+so you can not push `'some string value'` to it.
+
 ## Install
 
 ```bash
 $ composer require d0niek/php-generic
 ```
 
-## Generate generic array
+## Generate generic `array<Type>`
 
 There is a bin command that you should find in **vendor/bin**
 or somewhere else according to your **composer.json** settings.
@@ -28,7 +37,7 @@ or somewhere else according to your **composer.json** settings.
 To generate a generic array run:
 
 ```bash
-$ bin/generic generate:array [-s|--saveCollection [SAVECOLLECTION]] [--] <type> <namespace>
+$ bin/generic generate:array [-s|--save [SAVE]] [--] <type> <namespace>
 ```
 where:
 * **-s**|**--saveCollection** - do you want to save generated array for future regenerate (default **true**),
@@ -56,14 +65,14 @@ If this directory does not exists, exceptions will be throw.
 > Tip! Store all php-generics in one diretory and add it to **.gitignore**.
 When php will start support generics, replace `ArrayInt` to `array<int>` and remove php-generic directory.
 
-## Generate generic Vector
+## Generate generic `Vector<Type>`
 
 You can alse generate generic [\\Ds\\Vector](http://php.net/manual/en/class.ds-vector.php)
 (it is new data structure since Php7,
     [here](https://medium.com/@rtheunissen/efficient-data-structures-for-php-7-9dda7af674cd)
     you can and you should read about it!). To do this just run:
 ```bash
-$ bin/generic generate:vector [-s|--saveCollection [SAVECOLLECTION]] [--] <type> <namespace>
+$ bin/generic generate:vector [-s|--save [SAVE]] [--] <type> <namespace>
 ```
 parameters means exacly the same whats means when you run `generate:array`.
 
