@@ -1,6 +1,6 @@
 <?php
 
-namespace d0niek\GenericCollection\Collections;
+namespace d0niek\Generic\Collections;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
@@ -99,5 +99,15 @@ abstract class ArrayGeneric implements \ArrayAccess, \Iterator, \Countable, \Ser
     public function valid(): bool
     {
         return !($this->position === count($this->data));
+    }
+
+    /**
+     * @return array
+     */
+    public function __debugInfo(): array
+    {
+        return [
+            'data' => $this->data
+        ];
     }
 }

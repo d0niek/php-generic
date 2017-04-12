@@ -1,9 +1,9 @@
 <?php
 
-namespace d0niek\GenericCollection\Service;
+namespace d0niek\Generic\Service;
 
 use Composer\Autoload\ClassLoader;
-use d0niek\GenericCollection\Model\GenericCollection;
+use d0niek\Generic\Model\GenericCollection;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>

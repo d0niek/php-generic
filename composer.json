@@ -1,17 +1,16 @@
 {
-    "name": "d0niek/generic-collection",
-    "description": "Generator for generic collections.",
+    "name": "d0niek/php-generic",
+    "description": "Generator for generic array/vector.",
     "type": "library",
     "keywords": [
-        "genericcollection",
         "generic",
-        "collection",
         "php",
         "array",
         "vector",
-        "php71"
+        "php71",
+        "generator"
     ],
-    "homepage": "https://github.com/d0niek/GenericCollection",
+    "homepage": "https://github.com/d0niek/php-generic",
     "license": "MIT",
     "authors": [
         {
@@ -20,7 +19,7 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/d0niek/GenericCollection/issues"
+        "issues": "https://github.com/d0niek/php-generic/issues"
     },
     "require": {
         "php": "^7.1",
@@ -35,11 +34,11 @@
         "php-ds/php-ds": "^1.1"
     },
     "bin": [
-        "bin/gCollection"
+        "bin/generic"
     ],
     "autoload": {
         "psr-4": {
-            "d0niek\\GenericCollection\\": "src/"
+            "d0niek\\Generic\\": "src/"
         }
     },
     "autoload-dev": {

@@ -2,8 +2,8 @@
 
 namespace d0niek\Tests\Collections;
 
-use d0niek\GenericCollection\Example\Collections\ArrayInt;
-use d0niek\GenericCollection\Collections\ArrayGeneric;
+use d0niek\Generic\Example\Collections\ArrayInt;
+use d0niek\Generic\Collections\ArrayGeneric;
 use PHPUnit\Framework\TestCase;
 
 /**

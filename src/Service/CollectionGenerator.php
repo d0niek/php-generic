@@ -1,10 +1,10 @@
 <?php
 
-namespace d0niek\GenericCollection\Service;
+namespace d0niek\Generic\Service;
 
-use d0niek\GenericCollection\Collections\GenericType;
-use d0niek\GenericCollection\Model\GenericCollection;
-use d0niek\GenericCollection\Repository\GenericCollectionRepositoryInterface;
+use d0niek\Generic\Collections\GenericType;
+use d0niek\Generic\Model\GenericCollection;
+use d0niek\Generic\Repository\GenericCollectionRepositoryInterface;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
@@ -22,24 +22,24 @@ class CollectionGenerator implements CollectionGeneratorInterface
     private const GENERIC_TYPE = [GenericType::ARRAY_TYPE, GenericType::VECTOR_TYPE];
 
     /**
-     * @var \d0niek\GenericCollection\Service\CollectionRenderInterface
+     * @var \d0niek\Generic\Service\CollectionRenderInterface
      */
     private $collectionRender;
 
     /**
-     * @var \d0niek\GenericCollection\Service\CollectionWriterInterface
+     * @var \d0niek\Generic\Service\CollectionWriterInterface
      */
     private $collectionWriter;
 
     /**
-     * @var \d0niek\GenericCollection\Repository\GenericCollectionRepositoryInterface $genericCollectionRepository
+     * @var \d0niek\Generic\Repository\GenericCollectionRepositoryInterface $genericCollectionRepository
      */
     private $genericCollectionRepository;
 
     /**
-     * @param \d0niek\GenericCollection\Service\CollectionRenderInterface $collectionRender
-     * @param \d0niek\GenericCollection\Service\CollectionWriterInterface $collectionWriter
-     * @param \d0niek\GenericCollection\Repository\GenericCollectionRepositoryInterface $genericCollectionRepository
+     * @param \d0niek\Generic\Service\CollectionRenderInterface $collectionRender
+     * @param \d0niek\Generic\Service\CollectionWriterInterface $collectionWriter
+     * @param \d0niek\Generic\Repository\GenericCollectionRepositoryInterface $genericCollectionRepository
      */
     public function __construct(
         CollectionRenderInterface $collectionRender,
@@ -79,7 +79,7 @@ class CollectionGenerator implements CollectionGeneratorInterface
     }
 
     /**
-     * @param \d0niek\GenericCollection\Model\GenericCollection $genericCollection
+     * @param \d0niek\Generic\Model\GenericCollection $genericCollection
      */
     private function updateGenericCollectionType(GenericCollection $genericCollection): void
     {
@@ -98,7 +98,7 @@ class CollectionGenerator implements CollectionGeneratorInterface
     }
 
     /**
-     * @param \d0niek\GenericCollection\Model\GenericCollection $genericCollection
+     * @param \d0niek\Generic\Model\GenericCollection $genericCollection
      * @param string $collectionType
      *
      * @throws \ErrorException

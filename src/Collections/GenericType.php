@@ -1,6 +1,6 @@
 <?php
 
-namespace d0niek\GenericCollection\Collections;
+namespace d0niek\Generic\Collections;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>

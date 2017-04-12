@@ -6,7 +6,7 @@ composer.phar
 # composer.lock
 
 bin/*
-!bin/gCollection
+!bin/generic
 !bin/report
 report/*
 !report/.gitkeep
