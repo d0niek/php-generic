@@ -49,10 +49,10 @@ class VectorGeneratorCommand extends Command
                 "Namespace of new generic vector."
             )
             ->addOption(
-                'saveCollection',
+                'save',
                 's',
                 InputOption::VALUE_OPTIONAL,
-                'Save generated collection to generated-collections.json file.',
+                'Save generated vector to generated-collections.json file.',
                 true
             );
     }
@@ -65,15 +65,15 @@ class VectorGeneratorCommand extends Command
         $type = $input->getArgument('type');
         $namespace = $input->getArgument('namespace');
         $genericCollection = new GenericCollection($type, $namespace);
-        $saveCollection = $input->getOption('saveCollection');
+        $save = $input->getOption('save');
 
-        if ($saveCollection !== true && $saveCollection !== 'true' && $saveCollection !== 'false') {
-            throw new \InvalidArgumentException('Possible values for saveCollection option are true or false');
+        if ($save !== true && $save !== 'true' && $save !== 'false') {
+            throw new \InvalidArgumentException('Possible values for save option are true or false');
         }
 
-        $saveCollection = $saveCollection === 'false' ? false : true;
+        $save = $save === 'false' ? false : true;
 
-        $this->collectionGenerator->generate($genericCollection, GenericType::VECTOR_TYPE, $saveCollection);
+        $this->collectionGenerator->generate($genericCollection, GenericType::VECTOR_TYPE, $save);
 
         return 0;
     }
