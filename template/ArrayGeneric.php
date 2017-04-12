@@ -10,25 +10,37 @@ use d0niek\GenericCollection\Collections\ArrayGeneric;
 final class <?= $genericCollection->getClass() ?> extends ArrayGeneric
 {
     /**
-     * @param <?= $genericCollection->getUse() !== '' ?
-                      '\\' . $genericCollection->getUse() :
-                      $genericCollection->getType() ?> ...$data
+     * @param <?= $genericCollection->getType() ?>[] $data
      */
     public function __construct(<?= $genericCollection->getType() ?> ...$data)
     {
         $this->data = $data;
     }
 
+    /**
+     * @return <?= $genericCollection->getType(), "\n" ?>
+     */
     public function current(): <?= $genericCollection->getType(), "\n" ?>
     {
         return current($this->data);
     }
 
+    /**
+     * @param mixed $offset
+     *
+     * @return <?= $genericCollection->getType(), "\n" ?>
+     */
     public function offsetGet($offset): <?= $genericCollection->getType(), "\n" ?>
     {
         return $this->data[$offset];
     }
 
+    /**
+     * @param mixed $offset
+     * @param <?= $genericCollection->getType() ?> $value
+     *
+     * @throws \InvalidArgumentException
+     */
     public function offsetSet($offset, $value): void
     {
         if (!<?= $this->getTypeCheckStatement($genericCollection->getType()) ?>) {

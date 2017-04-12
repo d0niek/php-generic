@@ -35,10 +35,10 @@ class GenericCollection implements \JsonSerializable
      */
     public function __construct(string $type, string $namespace, string $class = '', string $use = '')
     {
-        $this->type = $type;
-        $this->namespace = $namespace;
-        $this->class = $class;
-        $this->use = $use;
+        $this->type = str_replace('/', '\\', $type);
+        $this->namespace = str_replace('/', '\\', $namespace);
+        $this->class = str_replace('/', '\\', $class);
+        $this->use = str_replace('/', '\\', $use);
     }
 
     /**

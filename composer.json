@@ -5,7 +5,11 @@
     "keywords": [
         "genericcollection",
         "generic",
-        "collection"
+        "collection",
+        "php",
+        "array",
+        "vector",
+        "php71"
     ],
     "homepage": "https://github.com/d0niek/GenericCollection",
     "license": "MIT",
