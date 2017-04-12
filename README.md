@@ -1,7 +1,7 @@
-# Prepere for future with GenericCollection
+# Prepare for future with GenericCollection
 
 According to this [article](https://www.sitepoint.com/creating-strictly-typed-arrays-collections-php/)
-which shows how to create strictly typed arrays and collections in PHP, GenericCollection generator was born.
+which shows how to create strictly typed arrays and collections in Php7, GenericCollection generator was born.
 
 ---
 
@@ -22,20 +22,22 @@ $ composer require d0niek/generic-collection
 
 ## Generate generic array
 
-There is bin command that you should find in **vendor/bin**
+There is a bin command that you should find in **vendor/bin**
 or somewhere else according to your **composer.json** settings.
 
-To generate generic array run:
+To generate a generic array run:
 
 ```bash
 $ bin/gCollection generate:array [-s|--saveCollection [SAVECOLLECTION]] [--] <type> <namespace>
 ```
 where:
 * **-s**|**--saveCollection** - do you want to save generated collection for future regenerate (default **true**),
-* **type** - is a type of generic collection. It can be simple type (bool, int, float, string, array)
+* **type** - is a type of generic array. It can be simple type (bool, int, float, string, array)
 or complex type (\\YourApp\\Module\\Repository\\User),
-* **namespace** - is a namespace where new generic collection will be save.
+* **namespace** - is a namespace where new generic array will be save.
 Remember that namespace's directory have to exists.
+To separate namespace parts use **\\\\** or **/** to speed up typing
+if your namespace is 1:1 with your directory structure
 
 For example you have project in **/path/to/project** and your **composer.json** contains this kind of entry:
 ```json
