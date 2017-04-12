@@ -4,7 +4,7 @@
 
 namespace <?= $genericCollection->getNamespace() ?>;
 
-use d0niek\GenericCollection\Collections\ArrayGeneric;
+use d0niek\Generic\Collections\ArrayGeneric;
 <?= $genericCollection->getUse() !== '' ? 'use ' . $genericCollection->getUse() . ";\n" : '' ?>
 
 final class <?= $genericCollection->getClass() ?> extends ArrayGeneric

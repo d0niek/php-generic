@@ -1,8 +1,8 @@
 <?php
 
-namespace d0niek\GenericCollection\Example;
+namespace d0niek\Generic\Example;
 
-use d0niek\GenericCollection\Example\Collections\VectorUser;
+use d0niek\Generic\Example\Collections\VectorUser;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>

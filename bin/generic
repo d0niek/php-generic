@@ -10,14 +10,14 @@ $appPath = file_exists(__DIR__ . '/../../../autoload.php') ?
 
 $loader = require_once $appPath . '/vendor/autoload.php';
 
-use d0niek\GenericCollection\Command\ArrayGeneratorCommand;
-use d0niek\GenericCollection\Command\ExamplesGeneratorCommand;
-use d0niek\GenericCollection\Command\VectorGeneratorCommand;
-use d0niek\GenericCollection\Command\RegeneratCollectionsCommand;
-use d0niek\GenericCollection\Repository\JsonGenericCollectionRepository;
-use d0niek\GenericCollection\Service\CollectionWriter;
-use d0niek\GenericCollection\Service\CollectionRender;
-use d0niek\GenericCollection\Service\CollectionGenerator;
+use d0niek\Generic\Command\ArrayGeneratorCommand;
+use d0niek\Generic\Command\ExamplesGeneratorCommand;
+use d0niek\Generic\Command\VectorGeneratorCommand;
+use d0niek\Generic\Command\RegeneratCollectionsCommand;
+use d0niek\Generic\Repository\JsonGenericCollectionRepository;
+use d0niek\Generic\Service\CollectionWriter;
+use d0niek\Generic\Service\CollectionRender;
+use d0niek\Generic\Service\CollectionGenerator;
 use Symfony\Component\Console\Application;
 
 $collectionRender = new CollectionRender(__DIR__ . '/..');

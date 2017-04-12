@@ -1,8 +1,8 @@
 <?php
 
-namespace d0niek\GenericCollection\Command;
+namespace d0niek\Generic\Command;
 
-use d0niek\GenericCollection\Service\CollectionGeneratorInterface;
+use d0niek\Generic\Service\CollectionGeneratorInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -13,12 +13,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 class RegeneratCollectionsCommand extends Command
 {
     /**
-     * @var \d0niek\GenericCollection\Service\CollectionGeneratorInterface
+     * @var \d0niek\Generic\Service\CollectionGeneratorInterface
      */
     private $collectionGenerator;
 
     /**
-     * @param \d0niek\GenericCollection\Service\CollectionGeneratorInterface $collectionGenerator
+     * @param \d0niek\Generic\Service\CollectionGeneratorInterface $collectionGenerator
      */
     public function __construct(CollectionGeneratorInterface $collectionGenerator)
     {

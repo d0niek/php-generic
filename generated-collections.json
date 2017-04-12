@@ -1,14 +1,20 @@
 [
     {
         "type": "int",
-        "namespace": "d0niek\\GenericCollection\\Example\\Collections",
+        "namespace": "d0niek\\Generic\\Example\\Collections",
         "class": "ArrayInt",
         "use": ""
     },
     {
         "type": "int",
-        "namespace": "d0niek\\GenericCollection\\Example\\Collections",
+        "namespace": "d0niek\\Generic\\Example\\Collections",
         "class": "VectorInt",
         "use": ""
+    },
+    {
+        "type": "User",
+        "namespace": "d0niek\\Generic\\Example\\Collections",
+        "class": "VectorUser",
+        "use": "d0niek\\GenericCollection\\Example\\User"
     }
 ]

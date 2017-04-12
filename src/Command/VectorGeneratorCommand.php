@@ -1,10 +1,10 @@
 <?php
 
-namespace d0niek\GenericCollection\Command;
+namespace d0niek\Generic\Command;
 
-use d0niek\GenericCollection\Collections\GenericType;
-use d0niek\GenericCollection\Model\GenericCollection;
-use d0niek\GenericCollection\Service\CollectionGeneratorInterface;
+use d0niek\Generic\Collections\GenericType;
+use d0niek\Generic\Model\GenericCollection;
+use d0niek\Generic\Service\CollectionGeneratorInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -17,12 +17,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 class VectorGeneratorCommand extends Command
 {
     /**
-     * @var \d0niek\GenericCollection\Service\CollectionGeneratorInterface
+     * @var \d0niek\Generic\Service\CollectionGeneratorInterface
      */
     private $collectionGenerator;
 
     /**
-     * @param \d0niek\GenericCollection\Service\CollectionGeneratorInterface $collectionGenerator
+     * @param \d0niek\Generic\Service\CollectionGeneratorInterface $collectionGenerator
      */
     public function __construct(CollectionGeneratorInterface $collectionGenerator)
     {

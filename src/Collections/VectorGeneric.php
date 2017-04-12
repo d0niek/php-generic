@@ -1,6 +1,6 @@
 <?php
 
-namespace d0niek\GenericCollection\Collections;
+namespace d0niek\Generic\Collections;
 
 use Ds\Vector;
 
@@ -204,5 +204,15 @@ abstract class VectorGeneric implements \ArrayAccess, \Countable, \Iterator, \Js
     public function valid(): bool
     {
         return !($this->position === $this->count());
+    }
+
+    /**
+     * @return array
+     */
+    public function __debugInfo(): array
+    {
+        return [
+            'data' => $this->data
+        ];
     }
 }

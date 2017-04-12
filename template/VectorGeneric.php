@@ -5,7 +5,7 @@
 namespace <?= $genericCollection->getNamespace() ?>;
 
 use Ds\Vector;
-use d0niek\GenericCollection\Collections\VectorGeneric;
+use d0niek\Generic\Collections\VectorGeneric;
 <?= $genericCollection->getUse() !== '' ? 'use ' . $genericCollection->getUse() . ";\n" : '' ?>
 
 final class <?= $genericCollection->getClass() ?> extends VectorGeneric
