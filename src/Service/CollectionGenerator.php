@@ -37,8 +37,8 @@ class CollectionGenerator implements CollectionGeneratorInterface
     private $genericCollectionRepository;
 
     /**
-     * @param \d0niek\Generic\Service\CollectionRenderInterface $collectionRender
-     * @param \d0niek\Generic\Service\CollectionWriterInterface $collectionWriter
+     * @param \d0niek\Generic\Service\CollectionRenderInterface               $collectionRender
+     * @param \d0niek\Generic\Service\CollectionWriterInterface               $collectionWriter
      * @param \d0niek\Generic\Repository\GenericCollectionRepositoryInterface $genericCollectionRepository
      */
     public function __construct(
@@ -46,9 +46,21 @@ class CollectionGenerator implements CollectionGeneratorInterface
         CollectionWriterInterface $collectionWriter,
         GenericCollectionRepositoryInterface $genericCollectionRepository
     ) {
-        $this->collectionRender = $collectionRender;
-        $this->collectionWriter = $collectionWriter;
+        $this->collectionRender            = $collectionRender;
+        $this->collectionWriter            = $collectionWriter;
         $this->genericCollectionRepository = $genericCollectionRepository;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function regenerate(): void
+    {
+        $genericCollestions = $this->genericCollectionRepository->findAll();
+        foreach ($genericCollestions as $genericCollestion) {
+            $collectionType = str_replace(ucfirst($genericCollestion->getType()), '', $genericCollestion->getClass());
+            $this->generate($genericCollestion, $collectionType, false);
+        }
     }
 
     /**
@@ -83,13 +95,19 @@ class CollectionGenerator implements CollectionGeneratorInterface
      */
     private function updateGenericCollectionType(GenericCollection $genericCollection): void
     {
-        if (!class_exists($genericCollection->getType())) {
+        if (false === (
+                class_exists('\\' . $genericCollection->getType())
+                ||
+                interface_exists('\\' . $genericCollection->getType())
+            )
+        ) {
             echo 'Warning! Class "', $genericCollection->getType(), '" does not exists.', "\n";
         }
 
         $namespaceArray = explode('\\', $genericCollection->getType());
         if (!isset($namespaceArray[1])) {
             $genericCollection->setType('\\' . $genericCollection->getType());
+
             return;
         }
 
@@ -99,32 +117,21 @@ class CollectionGenerator implements CollectionGeneratorInterface
 
     /**
      * @param \d0niek\Generic\Model\GenericCollection $genericCollection
-     * @param string $collectionType
+     * @param string                                  $collectionType
      *
      * @throws \ErrorException
      */
     private function generateCollection(GenericCollection $genericCollection, string $collectionType): void
     {
         $renderedCollecion = $this->collectionRender->render($genericCollection, $collectionType);
-        $saveResult = $this->collectionWriter->write($genericCollection, $renderedCollecion);
+        $saveResult        = $this->collectionWriter->write($genericCollection, $renderedCollecion);
 
         if ($saveResult === true) {
             echo 'New generic collection ', $collectionType, '<', $genericCollection->getType(), "> saved.\n";
+
             return;
         }
 
         throw new \ErrorException('Something went wrong during saving collection!');
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function regenerate(): void
-    {
-        $genericCollestions = $this->genericCollectionRepository->findAll();
-        foreach ($genericCollestions as $genericCollestion) {
-            $collectionType = str_replace(ucfirst($genericCollestion->getType()), '', $genericCollestion->getClass());
-            $this->generate($genericCollestion, $collectionType, false);
-        }
     }
 }

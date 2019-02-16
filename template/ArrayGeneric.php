@@ -10,7 +10,7 @@ use d0niek\Generic\Collections\ArrayGeneric;
 final class <?= $genericCollection->getClass() ?> extends ArrayGeneric
 {
     /**
-     * @param <?= $genericCollection->getType() ?>[] $data
+     * @param <?= $genericCollection->getType() ?> ...$data
      */
     public function __construct(<?= $genericCollection->getType() ?> ...$data)
     {
