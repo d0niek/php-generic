@@ -26,7 +26,7 @@ final class <?= $genericCollection->getClass() ?> extends ArrayGeneric
     }
 
     /**
-     * @param int|string|null $offset
+     * @param mixed $offset
      *
      * @return <?= $genericCollection->getType(), "\n" ?>
      */
@@ -36,8 +36,8 @@ final class <?= $genericCollection->getClass() ?> extends ArrayGeneric
     }
 
     /**
-     * @param int|string|null $offset
-     * @param <?= $genericCollection->getType() ?> $value
+     * @param mixed $offset
+     * @param <?= $genericCollection->getType() ?>|mixed $value
      *
      * @throws \InvalidArgumentException
      */
