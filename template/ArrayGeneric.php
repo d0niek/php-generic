@@ -26,7 +26,7 @@ final class <?= $genericCollection->getClass() ?> extends ArrayGeneric
     }
 
     /**
-     * @param mixed $offset
+     * @param int|string|null $offset
      *
      * @return <?= $genericCollection->getType(), "\n" ?>
      */
@@ -36,7 +36,7 @@ final class <?= $genericCollection->getClass() ?> extends ArrayGeneric
     }
 
     /**
-     * @param mixed $offset
+     * @param int|string|null $offset
      * @param <?= $genericCollection->getType() ?> $value
      *
      * @throws \InvalidArgumentException
@@ -47,8 +47,16 @@ final class <?= $genericCollection->getClass() ?> extends ArrayGeneric
             throw new \InvalidArgumentException('Value ' . gettype($value) . ' is not instance of <?= $genericCollection->getType() ?>');
         }
 
-        is_null($offset) ?
+        null === $offset ?
             $this->data[] = $value :
             $this->data[$offset] = $value;
+    }
+
+    /**
+    * @return <?= $genericCollection->getType() ?>[]
+    */
+    public function toArray(): array
+    {
+        return $this->data;
     }
 }

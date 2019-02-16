@@ -28,10 +28,11 @@
     "require-dev": {
         "squizlabs/php_codesniffer": "^2.8",
         "phpmd/phpmd": "^2.6",
-        "phpunit/phpunit": "^6.1"
+        "phpunit/phpunit": "^6.1",
+        "php-ds/php-ds": "^1.1"
     },
     "suggest": {
-        "php-ds/php-ds": "^1.1"
+        "ext-ds": "*"
     },
     "bin": [
         "bin/generic"
