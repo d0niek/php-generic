@@ -59,4 +59,13 @@ final class <?= $genericCollection->getClass() ?> extends ArrayGeneric
     {
         return $this->data;
     }
+
+    /**
+    * @param <?= $genericCollection->getType() ?> $item
+    * @param mixed $key
+    */
+    public function add(<?= $genericCollection->getType() ?> $item, $key=null): void
+    {
+        $this->offsetSet($key, $item);
+    }
 }

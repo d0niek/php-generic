@@ -21,10 +21,6 @@ class JsonGenericCollectionRepository implements GenericCollectionRepositoryInte
     public function __construct(string $jsonFile)
     {
         $this->jsonFile = $jsonFile;
-
-        if (!file_exists($this->jsonFile)) {
-            $this->init();
-        }
     }
 
     /**
@@ -45,6 +41,9 @@ class JsonGenericCollectionRepository implements GenericCollectionRepositoryInte
      */
     public function save(GenericCollection $genericCollection): void
     {
+        if (!file_exists($this->jsonFile)) {
+            $this->init();
+        }
         $genericCollestions = $this->findAll();
         foreach ($genericCollestions as $gc) {
             if ($gc->compare($genericCollection) === 0) {
@@ -62,6 +61,9 @@ class JsonGenericCollectionRepository implements GenericCollectionRepositoryInte
      */
     public function findAll(): VectorGenericCollection
     {
+        if (!file_exists($this->jsonFile)) {
+            $this->init();
+        }
         $genericCollestions = new VectorGenericCollection();
 
         $jsonData = file_get_contents($this->jsonFile);
