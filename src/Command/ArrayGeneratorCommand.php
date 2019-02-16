@@ -53,7 +53,7 @@ class ArrayGeneratorCommand extends Command
                 's',
                 InputOption::VALUE_OPTIONAL,
                 'Save generated array to generated-collections.json file.',
-                true
+                false
             );
     }
 

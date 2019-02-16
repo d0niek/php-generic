@@ -53,7 +53,7 @@ class VectorGeneratorCommand extends Command
                 's',
                 InputOption::VALUE_OPTIONAL,
                 'Save generated vector to generated-collections.json file.',
-                true
+                false
             );
     }
 
