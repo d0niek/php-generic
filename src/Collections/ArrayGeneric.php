@@ -107,7 +107,19 @@ abstract class ArrayGeneric implements \ArrayAccess, \Iterator, \Countable, \Ser
     public function __debugInfo(): array
     {
         return [
-            'data' => $this->data
+            'data' => $this->data,
         ];
+    }
+
+    /**
+     * @param callable $filter
+     *
+     * @return $this
+     */
+    public function filter(callable $filter)
+    {
+        $this->data = \array_filter($this->data, $filter);
+
+        return $this;
     }
 }
