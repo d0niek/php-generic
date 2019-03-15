@@ -1,53 +1,53 @@
 {
-    "name": "d0niek/php-generic",
-    "description": "Generator for generic array/vector.",
-    "type": "library",
-    "keywords": [
-        "generic",
-        "php",
-        "array",
-        "vector",
-        "php71",
-        "generator"
-    ],
-    "homepage": "https://github.com/d0niek/php-generic",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Damian Glinkowski",
-            "email": "damianglinkowski@gmail.com"
-        }
-    ],
-    "support": {
-        "issues": "https://github.com/d0niek/php-generic/issues"
-    },
-    "require": {
-        "php": "^7.1",
-        "symfony/console": "^3.2|^4.2"
-    },
-    "require-dev": {
-        "squizlabs/php_codesniffer": "^2.8",
-        "phpmd/phpmd": "^2.6",
-        "phpunit/phpunit": "^6.1",
-        "php-ds/php-ds": "^1.1"
-    },
-    "suggest": {
-        "ext-ds": "*"
-    },
-    "bin": [
-        "bin/generic"
-    ],
-    "autoload": {
-        "psr-4": {
-            "d0niek\\Generic\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "d0niek\\Tests\\": "tests/"
-        }
-    },
-    "config": {
-        "bin-dir": "bin"
+  "name": "d0niek/php-generic",
+  "description": "Generator for generic array/vector.",
+  "type": "library",
+  "keywords": [
+    "generic",
+    "php",
+    "array",
+    "vector",
+    "php71",
+    "generator"
+  ],
+  "homepage": "https://github.com/d0niek/php-generic",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Damian Glinkowski",
+      "email": "damianglinkowski@gmail.com"
     }
+  ],
+  "support": {
+    "issues": "https://github.com/d0niek/php-generic/issues"
+  },
+  "require": {
+    "php": "^7.1",
+    "symfony/console": "^3.2|^4.2",
+    "php-ds/php-ds": "^1.1"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^2.8",
+    "phpmd/phpmd": "^2.6",
+    "phpunit/phpunit": "^6.1"
+  },
+  "suggest": {
+    "ext-ds": "*"
+  },
+  "bin": [
+    "bin/generic"
+  ],
+  "autoload": {
+    "psr-4": {
+      "d0niek\\Generic\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "d0niek\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "bin-dir": "bin"
+  }
 }
